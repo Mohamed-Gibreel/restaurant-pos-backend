@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { RestaurantModule } from './restaurant/restaurant.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Restaurant } from 'src/entities/restuarant.entity';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         const databaseName = configService.get('POSTGRES_DB');
         const username = configService.get('POSTGRES_USER');
         const password = configService.get('POSTGRES_PASSWORD');
+
         return {
           type: 'postgres',
           host: host,
@@ -20,7 +22,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
           username: username,
           password: password,
           database: databaseName,
-          entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+          entities: [Restaurant],
           synchronize: true,
         };
       },
