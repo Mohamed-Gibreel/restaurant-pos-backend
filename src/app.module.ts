@@ -3,6 +3,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { RestaurantModule } from './restaurant/restaurant.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Restaurant } from 'src/entities/restuarant.entity';
+import {
+  POSTGRES_DB,
+  POSTGRES_PASSWORD,
+  POSTGRES_USER,
+} from 'src/utils/constants';
 
 @Module({
   imports: [
@@ -11,9 +16,9 @@ import { Restaurant } from 'src/entities/restuarant.entity';
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
         const host = 'localhost';
-        const databaseName = configService.get('POSTGRES_DB');
-        const username = configService.get('POSTGRES_USER');
-        const password = configService.get('POSTGRES_PASSWORD');
+        const databaseName = configService.get(POSTGRES_DB);
+        const username = configService.get(POSTGRES_USER);
+        const password = configService.get(POSTGRES_PASSWORD);
 
         return {
           type: 'postgres',
