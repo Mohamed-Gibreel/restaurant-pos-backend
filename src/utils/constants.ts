@@ -1,4 +1,5 @@
 export const DATA_SOURCE = 'DATA_SOURCE';
 export const POSTGRES_DB = 'POSTGRES_DB';
+export const POSTGRES_HOST = 'POSTGRES_HOST';
 export const POSTGRES_USER = 'POSTGRES_USER';
 export const POSTGRES_PASSWORD = 'POSTGRES_PASSWORD';

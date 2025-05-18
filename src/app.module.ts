@@ -1,5 +1,6 @@
 import {
   POSTGRES_DB,
+  POSTGRES_HOST,
   POSTGRES_PASSWORD,
   POSTGRES_USER,
 } from 'src/utils/constants';
@@ -15,7 +16,7 @@ import { Restaurant } from 'src/restaurant/entities/restuarant.entity';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
-        const host = 'localhost';
+        const host = configService.get(POSTGRES_HOST);
         const databaseName = configService.get(POSTGRES_DB);
         const username = configService.get(POSTGRES_USER);
         const password = configService.get(POSTGRES_PASSWORD);
