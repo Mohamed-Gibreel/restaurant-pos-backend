@@ -1,6 +1,16 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { RestaurantService } from './restaurant.service';
-import { RestaurantDTO } from './dto/resturant.dto';
+import { CreateRestaurantDTO } from './dto/create-resturant.dto';
+import { UpdateRestaurantDTO } from 'src/restaurant/dto/update-resturant.dto';
 
 @Controller('restaurant')
 export class RestaurantController {
@@ -12,8 +22,17 @@ export class RestaurantController {
   }
 
   @Post()
-  async createRestaurant(@Body() body: RestaurantDTO) {
+  async createRestaurant(@Body() body: CreateRestaurantDTO) {
     return await this.service.createRestaurant(body);
+  }
+
+  @Patch(':id')
+  async updateRestaurant(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: UpdateRestaurantDTO,
+  ) {
+    return await this.service.updateRestaurant(id, body);
+    return true;
   }
 
   @Delete(':id')

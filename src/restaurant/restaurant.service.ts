@@ -1,8 +1,12 @@
-import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { Restaurant } from './entities/restuarant.entity';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { RestaurantDTO } from './dto/resturant.dto';
+
+import { Restaurant } from './entities/restuarant.entity';
+
+import { CreateRestaurantDTO } from './dto/create-resturant.dto';
+import { UpdateRestaurantDTO } from './dto/update-resturant.dto';
+import { convertToInstance } from 'src/utils/dto-validator';
 
 @Injectable()
 export class RestaurantService {
@@ -15,10 +19,18 @@ export class RestaurantService {
     return this.repository.find();
   }
 
-  async createRestaurant(body: RestaurantDTO) {
+  async createRestaurant(body: CreateRestaurantDTO) {
     var restaurant = new Restaurant();
     restaurant.name = body.name;
     return this.repository.save(restaurant);
+  }
+
+  async updateRestaurant(id: number, body: UpdateRestaurantDTO) {
+    // var update = new UpdateRestaurantDTO();
+    // var updateRestaurantDto = UpdateRestaurantDTO.convertToInstance(body);
+    // if (updateRestaurantDto == undefined) return false;
+    var updateRestaurantDto = convertToInstance(UpdateRestaurantDTO, body);
+    return updateRestaurantDto;
   }
 
   async deleteRestaurant(id: number) {
