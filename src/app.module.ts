@@ -1,13 +1,13 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { RestaurantModule } from './restaurant/restaurant.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Restaurant } from 'src/entities/restuarant.entity';
 import {
   POSTGRES_DB,
   POSTGRES_PASSWORD,
   POSTGRES_USER,
 } from 'src/utils/constants';
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { RestaurantModule } from './restaurant/restaurant.module';
+import { Restaurant } from 'src/restaurant/entities/restuarant.entity';
 
 @Module({
   imports: [
